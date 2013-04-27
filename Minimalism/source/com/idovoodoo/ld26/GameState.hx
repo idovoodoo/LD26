@@ -22,20 +22,25 @@ class GameState extends FlxState
 {
 	public static var LEVEL_SIZE:FlxPoint = new FlxPoint(800, 480);	
 	public static var TILE_SIZE:FlxPoint = new FlxPoint(40, 10);
-	public static var LEVEL:FlxGroup = null;
+	public static var LEVEL0:Map0 = null;
+	public static var LEVEL1:Map1 = null;
 
 	override public function create():Void 
 	{
 		#if !neko
-		FlxG.bgColor = 0xff131c1b;
+		FlxG.bgColor = 0xffffffff;
 		#else
-		FlxG.camera.bgColor = {rgb: 0x131c1b, a: 0xff};
+		FlxG.camera.bgColor = {rgb: 0xffffff, a: 0xff};
 		#end		
 		FlxG.mouse.hide();
 		
 		super.create();
-		LEVEL = new Map0(LEVEL_SIZE, TILE_SIZE);
-		this.add(LEVEL);
+		GameRegistry.init();
+		GameRegistry.level = 0;
+		LEVEL0 = new Map0(LEVEL_SIZE, TILE_SIZE);
+		//LEVEL1 = new Map1(new FlxPoint(1200, 480), TILE_SIZE);
+		this.add(LEVEL0);
+		//this.add(LEVEL1);
 	}
 	
 	override public function destroy():Void 
@@ -46,6 +51,17 @@ class GameState extends FlxState
 	override public function update():Void 
 	{
 		super.update();
+		if (GameRegistry.finished) {
+			if (GameRegistry.level == 0) { // level 0 (map0) has finished!		
+				FlxG.log("on to map1");
+				GameRegistry.level = 1;
+				GameRegistry.finished = false;
+				LEVEL0.exists = false;
+				LEVEL1 = new Map1(new FlxPoint(1200, 480), TILE_SIZE);
+				this.add(LEVEL1);
+			}
+		}
+		
 	}	
 	
 }

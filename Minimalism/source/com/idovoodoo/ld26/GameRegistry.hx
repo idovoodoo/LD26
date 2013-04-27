@@ -11,12 +11,10 @@ import org.flixel.FlxPoint;
 
 class GameRegistry 
 {
-	public static var mapGroup:FlxGroup;
-	public static var guiGroup:FlxGroup;
+	public static var level:Int = 0;
+	public static var finished:Bool = false;
 
 	public static function init() {
-		mapGroup = new FlxGroup();
-		guiGroup = new FlxGroup();
 	}
 	
 }
