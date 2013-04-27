@@ -229,73 +229,21 @@ class Map0 extends FlxGroup
 			case 0:
 				hideAllTiles();
 			case 9:
-				var tileArray:Array<Int> = tiles.getTileInstances(9);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 1, true);
-				}
 				platOne = true;
-			case 17:
-				var tileArray:Array<Int> = tiles.getTileInstances(17);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 1, true);
-				}
 			case 10:
-				var tileArray:Array<Int> = tiles.getTileInstances(10);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 2, true);
-				}
 				platTwo = true;
 				potato.visible = true;
-			case 18:
-				var tileArray:Array<Int> = tiles.getTileInstances(18);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 2, true);
-				}
 			case 11:
-				var tileArray:Array<Int> = tiles.getTileInstances(11);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 3, true);
-				}
 				platThree = true;
-			case 19:
-				var tileArray:Array<Int> = tiles.getTileInstances(19);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 3, true);
-				}
 			case 12:
-				var tileArray:Array<Int> = tiles.getTileInstances(12);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 4, true);
-				}
 				platFour = true;
-			case 20:
-				var tileArray:Array<Int> = tiles.getTileInstances(20);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 4, true);
-				}
 			case 13:
-				var tileArray:Array<Int> = tiles.getTileInstances(13);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 5, true);
-				}
 				platFive = true;
-			case 21:
-				var tileArray:Array<Int> = tiles.getTileInstances(21);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 5, true);
-				}
 			case 14:
-				var tileArray:Array<Int> = tiles.getTileInstances(14);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 6, true);
-				}
 				platSix = true;
-			case 22:
-				var tileArray:Array<Int> = tiles.getTileInstances(22);
-				for (i in tileArray) {
-					tiles.setTileByIndex(i, 6, true);
-				}
 		}
+		
+		changeCurrentTile(tileBelow);
 		
 		//check for potato collision
 		if (FlxG.collide(player, potato))
@@ -307,10 +255,20 @@ class Map0 extends FlxGroup
 	
 	private function changeCurrentTile(value:Int):Void
 	{
-		var tileArray:Array<Int> = tiles.getTileInstances(value);
-		for (i in tileArray) {
-			tiles.setTileByIndex(i, value - 8, true);
+		if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14) {
+			var tileArray:Array<Int> = tiles.getTileInstances(value);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, value - 8, true);
+			}
 		}
+		else if (value == 17 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22) {
+			var tileArray:Array<Int> = tiles.getTileInstances(value);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, value - 16, true);
+			}
+		}
+		
+		
 	}
 	
 	/**
