@@ -313,6 +313,7 @@ class Map0 extends FlxGroup
 				case 0:
 					hideAllTiles();
 				case 9:
+					messageText.text = "Your memory is not very good. You are only a little square.";
 					platOne = true;
 				case 10:
 					messageText.text = "These little stars will help you remember.";

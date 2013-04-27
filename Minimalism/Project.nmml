@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<app title="Minimalism" file="Minimalism" main="com.idovoodoo.ld26.Main" version="0.0.1" company="Idovoodoo" />
+	<app title="The Forgetful Little Square" file="Minimalism" main="com.idovoodoo.ld26.Main" version="0.0.1" company="Idovoodoo" />
+	
 	
 	<window width="800" height="480" fps="30" orientation="portrait" resizable="true" if="flash" />
 	<window width="800" height="480" fps="30" orientation="landscape" fullscreen="false" unless="flash" />
@@ -40,5 +41,5 @@
 	<!-- optimize JS output -->
 	<haxeflag name="--dead-code-elimination" if="html5" />
 	<haxeflag name="--js-modern" if="html5" />
-	
+	<app preloader="com.idovoodoo.ld26.VoodooPreloader" />
 </project>
