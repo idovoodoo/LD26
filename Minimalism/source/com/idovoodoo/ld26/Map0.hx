@@ -5,6 +5,7 @@ import org.flixel.FlxGroup;
 import org.flixel.FlxParticle;
 import org.flixel.FlxPoint;
 import org.flixel.FlxRect;
+import org.flixel.FlxSound;
 import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxG;
@@ -40,6 +41,11 @@ class Map0 extends FlxGroup
 	private var exitReached:Bool = false;
 	private var pEmitter:FlxEmitter;
 	private var particle:FlxParticle;
+	private var music:FlxSound;
+	private var platformHit:FlxSound;
+	private var explosion:FlxSound;
+	private var previousPlat:Int = 0;
+	private var hitSoundPlayed:Bool = false;
 	
 	private static var SIZE:FlxPoint = new FlxPoint(10, 10);
 	
@@ -115,7 +121,7 @@ class Map0 extends FlxGroup
 	 */
 	private function createLevel():Void 
 	{
-		FlxG.bgColor = 0xff8888ff;
+		FlxG.bgColor = 0xffffffff;
 		createMap();
 		createPlayer();
 		createObjects();
@@ -153,7 +159,7 @@ class Map0 extends FlxGroup
 	{
 		//TODO: move to player class
 		player = new FlxSprite();
-		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xffffffff);
+		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xff8888ff);
 		//spawn position and player properties
 		player.x = 50;
 		player.y = 350;
@@ -169,6 +175,15 @@ class Map0 extends FlxGroup
 	 */
 	private function createObjects():Void
 	{
+		//setup sound and music
+		music = new FlxSound();
+		music.loadEmbedded("assets/music.mp3", true);
+		music.fadeIn(1);
+		platformHit = new FlxSound();
+		platformHit.loadEmbedded("assets/platform-hit.mp3", false);
+		explosion = new FlxSound();
+		explosion.loadEmbedded("assets/explode.mp3", false);
+		
 		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato.png", false, false, 30, 39, true);
@@ -180,7 +195,7 @@ class Map0 extends FlxGroup
 		
 		//exit
 		exitDoor = new FlxSprite();
-		exitDoor.loadGraphic("assets/exit-black.png", true, false, 50, 50, true);
+		exitDoor.loadGraphic("assets/exit.png", true, false, 50, 50, true);
 		exitDoor.addAnimation("default", [0, 1], 1, true);
 		exitDoor.x = 700;
 		exitDoor.y = 70 + _tileSize.y - exitDoor.height; 
@@ -242,10 +257,27 @@ class Map0 extends FlxGroup
 	override public function update():Void 
 	{
 		super.update();
-		FlxG.collide(mapGroup, player);
-		FlxG.collide(mapGroup, potato);
+		if (!exitReached) {
+			//check which tile player is on
+			var center:FlxPoint = player.getMidpoint();
+			var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
+				
+			//player and platform collisions
+			if (FlxG.collide(mapGroup, player)) {
+				if (!hitSoundPlayed) {
+					previousPlat = tileBelow;
+					platformHit.play();
+					hitSoundPlayed = true;
+				}
+				else {
+					if (previousPlat != tileBelow)
+						hitSoundPlayed = false;
+				}
+			}
+			
+			//potato and platform collisions
+			FlxG.collide(mapGroup, potato);
 		
-		if(!exitReached){
 			//player movement > TODO: move to player class
 			if (FlxG.keys.LEFT) {
 				player.velocity.x = -100;
@@ -260,9 +292,7 @@ class Map0 extends FlxGroup
 				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			
-			//check which tile player is on
-			var center:FlxPoint = player.getMidpoint();
-			var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
+			
 			//FlxG.log(tileBelow);
 			
 			switch(tileBelow) {
@@ -283,14 +313,17 @@ class Map0 extends FlxGroup
 					platSix = true;
 			}
 			
+			
+			
 			changeCurrentTile(tileBelow);
 			
 			//check for potato collision
 			if (FlxG.collide(player, potato))
 			{
 				potatoFound = true;
-				explode(potato.getMidpoint().x, potato.getMidpoint().y);
+				explode(potato.getMidpoint().x, potato.getMidpoint().y);				
 				potato.exists = false;
+				explosion.play();
 			}
 			
 			//check for exit collision
@@ -299,6 +332,8 @@ class Map0 extends FlxGroup
 				exitReached = true;
 				explode(exitDoor.getMidpoint().x, exitDoor.getMidpoint().y);
 				exitDoor.exists = false;
+				explosion.play();
+				music.fadeOut(1);
 			}
 		}
 	}
@@ -309,6 +344,7 @@ class Map0 extends FlxGroup
 	 */
 	private function changeCurrentTile(value:Int):Void
 	{
+		
 		if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14) {
 			var tileArray:Array<Int> = tiles.getTileInstances(value);
 			for (i in tileArray) {
