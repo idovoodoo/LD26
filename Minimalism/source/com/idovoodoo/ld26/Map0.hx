@@ -1,6 +1,8 @@
 package com.idovoodoo.ld26;
 
+import org.flixel.FlxEmitter;
 import org.flixel.FlxGroup;
+import org.flixel.FlxParticle;
 import org.flixel.FlxPoint;
 import org.flixel.FlxRect;
 import org.flixel.FlxSprite;
@@ -8,6 +10,7 @@ import org.flixel.FlxState;
 import org.flixel.FlxG;
 import org.flixel.FlxCamera;
 import org.flixel.FlxTilemap;
+import org.flixel.FlxTimer;
 
 /**
  * ...
@@ -33,6 +36,11 @@ class Map0 extends FlxGroup
 	private var platSix:Bool = false;
 	private var potato:FlxSprite;
 	private var potatoFound:Bool = false;
+	private var exitDoor:FlxSprite;
+	private var exitReached:Bool = false;
+	private var pEmitter:FlxEmitter;
+	private var particle:FlxParticle;
+	
 	private static var SIZE:FlxPoint = new FlxPoint(10, 10);
 	
 	//map
@@ -110,7 +118,7 @@ class Map0 extends FlxGroup
 		FlxG.bgColor = 0xff8888ff;
 		createMap();
 		createPlayer();
-		createPickups();
+		createObjects();
 		createGUI();
 		addGroups();
 		createCamera();
@@ -159,8 +167,9 @@ class Map0 extends FlxGroup
 	/**
 	 * Setup any pickups
 	 */
-	private function createPickups():Void
+	private function createObjects():Void
 	{
+		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato.png", false, false, 30, 39, true);
 		potato.x = 400;
@@ -168,6 +177,37 @@ class Map0 extends FlxGroup
 		potato.acceleration.y = 200;
 		potato.visible = false;
 		this.add(potato);
+		
+		//exit
+		exitDoor = new FlxSprite();
+		exitDoor.loadGraphic("assets/exit-black.png", true, false, 50, 50, true);
+		exitDoor.addAnimation("default", [0, 1], 1, true);
+		exitDoor.x = 700;
+		exitDoor.y = 70 + _tileSize.y - exitDoor.height; 
+		exitDoor.play("default");
+		this.add(exitDoor);
+		
+		//setup particle emitter for collisions
+		pEmitter = new FlxEmitter();
+		pEmitter.setRotation(0, 0);
+		pEmitter.makeParticles("assets/particles.png", 1200, 0, true, 0);
+		add(pEmitter);
+		
+		//FlxTimer.manager.add(new FlxTimer().start(4, 0, onTimer));	
+	}
+	
+	//private function onTimer(timer:FlxTimer):Void
+	//{
+	//	explode(FlxG.width / 2, FlxG.height / 2);
+	//}
+	
+	private function explode(x:Float = 0, y:Float = 0):Void
+	{			
+		pEmitter.x = x;
+		pEmitter.y = y;
+		
+		pEmitter.start(true, 2, 0, 400);
+		pEmitter.update();
 	}
 	
 	/**
@@ -205,54 +245,68 @@ class Map0 extends FlxGroup
 		FlxG.collide(mapGroup, player);
 		FlxG.collide(mapGroup, potato);
 		
-		//player movement > TODO: move to player class
-		if (FlxG.keys.LEFT) {
-			player.velocity.x = -100;
-			FlxG.log("x: " + player.x + " y: " + player.y);
-		}
-		if (FlxG.keys.RIGHT) {
-			player.velocity.x = 100;
-			//FlxG.log("x: " + player.x + " y: " + player.y);
-		}
-		if (player.velocity.y == 0 && FlxG.keys.UP) {
-			player.velocity.y = -275;
-			//FlxG.log("x: " + player.x + " y: " + player.y);
-		}
-		
-		//check which tile player is on
-		var center:FlxPoint = player.getMidpoint();
-		var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
-		//FlxG.log(tileBelow);
-		
-		//TODO: REFACTOR!!!!!!!!
-		switch(tileBelow) {
-			case 0:
-				hideAllTiles();
-			case 9:
-				platOne = true;
-			case 10:
-				platTwo = true;
-				potato.visible = true;
-			case 11:
-				platThree = true;
-			case 12:
-				platFour = true;
-			case 13:
-				platFive = true;
-			case 14:
-				platSix = true;
-		}
-		
-		changeCurrentTile(tileBelow);
-		
-		//check for potato collision
-		if (FlxG.collide(player, potato))
-		{
-			potato.exists = false;
-			potatoFound = true;
+		if(!exitReached){
+			//player movement > TODO: move to player class
+			if (FlxG.keys.LEFT) {
+				player.velocity.x = -100;
+				FlxG.log("x: " + player.x + " y: " + player.y);
+			}
+			if (FlxG.keys.RIGHT) {
+				player.velocity.x = 100;
+				//FlxG.log("x: " + player.x + " y: " + player.y);
+			}
+			if (player.velocity.y == 0 && FlxG.keys.UP) {
+				player.velocity.y = -275;
+				//FlxG.log("x: " + player.x + " y: " + player.y);
+			}
+			
+			//check which tile player is on
+			var center:FlxPoint = player.getMidpoint();
+			var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
+			//FlxG.log(tileBelow);
+			
+			switch(tileBelow) {
+				case 0:
+					hideAllTiles();
+				case 9:
+					platOne = true;
+				case 10:
+					platTwo = true;
+					potato.visible = true;
+				case 11:
+					platThree = true;
+				case 12:
+					platFour = true;
+				case 13:
+					platFive = true;
+				case 14:
+					platSix = true;
+			}
+			
+			changeCurrentTile(tileBelow);
+			
+			//check for potato collision
+			if (FlxG.collide(player, potato))
+			{
+				potatoFound = true;
+				explode(potato.getMidpoint().x, potato.getMidpoint().y);
+				potato.exists = false;
+			}
+			
+			//check for exit collision
+			if (FlxG.collide(player, exitDoor))
+			{
+				exitReached = true;
+				explode(exitDoor.getMidpoint().x, exitDoor.getMidpoint().y);
+				exitDoor.exists = false;
+			}
 		}
 	}
 	
+	/**
+	 * Change the tile index that is underneath the player
+	 * @param	value
+	 */
 	private function changeCurrentTile(value:Int):Void
 	{
 		if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14) {
@@ -266,9 +320,7 @@ class Map0 extends FlxGroup
 			for (i in tileArray) {
 				tiles.setTileByIndex(i, value - 16, true);
 			}
-		}
-		
-		
+		}			
 	}
 	
 	/**
@@ -289,7 +341,7 @@ class Map0 extends FlxGroup
 	}
 	
 	/**
-	 * Hides all the map tiles
+	 * Hides all of the map tiles
 	 */
 	private function hideAllTiles():Void 
 	{

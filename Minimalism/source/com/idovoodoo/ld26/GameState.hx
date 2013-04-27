@@ -21,13 +21,13 @@ import org.flixel.FlxU;
 class GameState extends FlxState
 {
 	public static var LEVEL_SIZE:FlxPoint = new FlxPoint(800, 480);	
-	public static var BLOCK_SIZE:FlxPoint = new FlxPoint(40, 10);
+	public static var TILE_SIZE:FlxPoint = new FlxPoint(40, 10);
 	public static var LEVEL:FlxGroup = null;
 
 	override public function create():Void 
 	{
 		super.create();
-		LEVEL = new Map0(LEVEL_SIZE, BLOCK_SIZE);
+		LEVEL = new Map0(LEVEL_SIZE, TILE_SIZE);
 		this.add(LEVEL);
 	}
 	
