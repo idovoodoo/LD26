@@ -26,6 +26,13 @@ class GameState extends FlxState
 
 	override public function create():Void 
 	{
+		#if !neko
+		FlxG.bgColor = 0xff131c1b;
+		#else
+		FlxG.camera.bgColor = {rgb: 0x131c1b, a: 0xff};
+		#end		
+		FlxG.mouse.hide();
+		
 		super.create();
 		LEVEL = new Map0(LEVEL_SIZE, TILE_SIZE);
 		this.add(LEVEL);

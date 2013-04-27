@@ -36,6 +36,7 @@ class Map0 extends FlxGroup
 	private var platFour:Bool = false;
 	private var platFive:Bool = false;
 	private var platSix:Bool = false;
+	
 	private var potato:FlxSprite;
 	private var potatoFound:Bool = false;
 	private var exitDoor:FlxSprite;
@@ -51,6 +52,10 @@ class Map0 extends FlxGroup
 	private var potatoCounter:Float = 0;
 	private static var SIZE:FlxPoint = new FlxPoint(10, 10);
 	private var timerText:FlxText;
+	private var messageText:FlxText;
+	private var gameEndTime:Float = 3;
+	private var gameEndCounter:Float = 0;
+	private var endState:Bool = false;
 	
 	//map
 	private static var LEVEL:Array<Int> = [
@@ -221,15 +226,19 @@ class Map0 extends FlxGroup
 	}
 	
 	/**
-	 * Build gui... if we are having one???
+	 * Build gui
 	 */
 	private function createGUI():Void 
 	{
-		timerText = new FlxText(10, 10, FlxG.width, Std.string(Std.int(potatoCounter)));
+		timerText = new FlxText(10, 30, FlxG.width, Std.string(Std.int(potatoCounter)));
 		timerText.setFormat(null, 32, 0x968888ff, "center");
 		timerText.scrollFactor = new FlxPoint(0, 0);
 		timerText.visible = false;
 		guiGroup.add(timerText);
+		
+		messageText = new FlxText(10, 10, FlxG.width, "Your memory is not very good. You are only a little square.");
+		messageText.setFormat(null, 14, 0x968888ff, "left");
+		guiGroup.add(messageText);
 	}
 	
 	/**
@@ -291,7 +300,13 @@ class Map0 extends FlxGroup
 				player.velocity.y = -275;
 				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
-		
+			
+			//exit back to the main menu
+			if (FlxG.keys.ESCAPE) {
+				music.stop();
+				FlxG.switchState(new MenuState());
+			}
+			
 			//FlxG.log(tileBelow);
 			//set map tile types
 			switch(tileBelow) {
@@ -300,16 +315,21 @@ class Map0 extends FlxGroup
 				case 9:
 					platOne = true;
 				case 10:
+					messageText.text = "These little stars will help you remember.";
 					platTwo = true;
 					potato.visible = true;
 				case 11:
 					platThree = true;
+					messageText.text = "That square in the corner will take you to the next level.";
 				case 12:
 					platFour = true;
+					messageText.text = "That square in the corner will take you to the next level.";
 				case 13:
 					platFive = true;
+					messageText.text = "That square in the corner will take you to the next level.";
 				case 14:
 					platSix = true;
+					messageText.text = "That's it, you are nearly there!";
 			}
 						
 			changeCurrentTile(tileBelow);
@@ -329,6 +349,7 @@ class Map0 extends FlxGroup
 				explode(potato.getMidpoint().x, potato.getMidpoint().y);				
 				potato.exists = false;
 				explosion.play();
+				messageText.text = "But they don't last very long!";
 			}
 			
 			//set timer for potato counter
@@ -349,11 +370,27 @@ class Map0 extends FlxGroup
 			{
 				exitReached = true;
 				explode(exitDoor.getMidpoint().x, exitDoor.getMidpoint().y);
+				messageText.text = "Well done Little Square!";
 				exitDoor.exists = false;
 				player.exists = false;
 				mapGroup.exists = false;
+				if (timerText.exists)
+					timerText.exists = false;
 				explosion.play();
 				music.fadeOut(1);
+				FlxG.flash(0xFFFFFFFF, 0.75);
+				FlxG.fade(0xff000000, 1);
+				endState = true;
+			}
+		}
+		
+		if (endState)
+		{
+			gameEndCounter += FlxG.elapsed;
+			if (gameEndCounter >= gameEndTime)
+			{
+				music.stop();
+				FlxG.switchState(new MenuState());
 			}
 		}
 	}

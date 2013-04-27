@@ -8,6 +8,6 @@ class GameClass extends FlxGame
 	
 	public function new() 
 	{
-		super(800, 480, GameState, 1, 30, 30);
+		super(800, 480, MenuState, 1, 30, 30);
 	}
 }
