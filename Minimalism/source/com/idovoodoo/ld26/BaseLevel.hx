@@ -15,6 +15,8 @@ class BaseLevel extends FlxGroup
 {
 	private var state:FlxState;
 	private var numTiles:FlxPoint;
+	private var mapGroup:FlxGroup;
+	private var guiGroup:FlxGroup;
 	private var _playerStart:FlxPoint;
 	private var _levelSize:FlxPoint;
 	private var _tileSize:FlxPoint;
@@ -24,7 +26,7 @@ class BaseLevel extends FlxGroup
 		super();
 		_levelSize = levelSize;
 		_tileSize = tileSize;
-		createLevel();
+		createLevel();		
 	}
 	
 	private function createLevel():Void
@@ -50,18 +52,15 @@ class BaseLevel extends FlxGroup
 	
 	private function addGroups(): Void
 	{
-		this.add(GameRegistry.mapGroup);
-		//this.add(GameRegistry.player);
-		//this.add(GameRegistry.enemyManager);
-		//this.add(GameRegistry.weaponManager);
-		this.add(GameRegistry.guiGroup);	
+		this.add(mapGroup);
+		this.add(guiGroup);	
 	}
 	
 	private function createCamera():Void
 	{	
 		FlxG.worldBounds = new FlxRect(0, 0, _levelSize.x, _levelSize.y);
 		FlxG.camera.setBounds(0, 0, _levelSize.x, _levelSize.y, false);
-		//FlxG.camera.follow(Registry.player, FlxCamera.STYLE_PLATFORMER);
+		//FlxG.camera.follow(GameRegistry.player, FlxCamera.STYLE_PLATFORMER);
 	}
 	
 	override public function update():Void 

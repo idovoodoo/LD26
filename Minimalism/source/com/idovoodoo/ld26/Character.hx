@@ -26,20 +26,18 @@ import org.flixel.FlxObject;
   */
 class Character extends FlxSprite
 {	
-	
 	public var RUNSPEED:Int = 150;	
 	public var JUMPSPEED:Float = 200;
 	public var GRAVITY_ACCELERATION:Float = 450;
-	
 	
 	/**
 	 * Constructor
 	 * @param	x
 	 * @param	y
 	 */
-	public function new(characterStart:FlxPoint) 
+	public function new(x:Int, y:Int) 
 	{
-		super(Std.int(characterStart.x), Std.int(characterStart.y));
+		super(x, y);
 		maxVelocity = new FlxPoint(RUNSPEED, JUMPSPEED);
 		drag = new FlxPoint(RUNSPEED * 4, JUMPSPEED * 4);
 		acceleration.y = GRAVITY_ACCELERATION;

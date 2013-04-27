@@ -3,8 +3,8 @@
 	
 	<app title="Minimalism" file="Minimalism" main="com.idovoodoo.ld26.Main" version="0.0.1" company="Idovoodoo" />
 	
-	<window width="800" height="400" fps="30" orientation="portrait" resizable="true" if="flash" />
-	<window width="800" height="400" fps="30" orientation="landscape" fullscreen="false" unless="flash" />
+	<window width="800" height="480" fps="30" orientation="portrait" resizable="true" if="flash" />
+	<window width="800" height="480" fps="30" orientation="landscape" fullscreen="false" unless="flash" />
 	
 	<classpath name="source" />
 	
