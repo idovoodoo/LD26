@@ -36,29 +36,14 @@ class Map0 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,
+		0,0,0,0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,6,6,6,6,0,0,0,0,0,0,0,0,4,4,4,4,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,13,13,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -66,8 +51,23 @@ class Map0 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,11,11,11,11,0,0,0,0,0,0,0,0,12,12,12,12,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -122,8 +122,10 @@ class Map0 extends FlxGroup
 			0, //start index for drawings
 			1 //which tile for collision
 		);	
+		//tiles.setTileByIndex(1, 6, true);
 		
 		mapGroup.add(tiles);
+		FlxG.log("map created");
 	}
 	
 	/**
@@ -131,13 +133,17 @@ class Map0 extends FlxGroup
 	 */
 	private function createPlayer():Void 
 	{
+		//TODO: move to player class
 		player = new FlxSprite();
-		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xff888888);
+		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xffffffff);
+		//spawn position and player properties
 		player.x = 50;
-		player.y = 50;
-		player.acceleration.y = 300;
+		player.y = 350;
+		player.acceleration.y = 350;
 		player.drag.x = 200;
+		//add to scene
 		this.add(player);
+		FlxG.log("player created");
 	}
 	
 	/**
@@ -174,16 +180,101 @@ class Map0 extends FlxGroup
 		super.update();
 		FlxG.collide(mapGroup, player);
 		
+		//player movement > TODO: move to player class
 		if (FlxG.keys.LEFT) {
 			player.velocity.x = -100;
+			//FlxG.log("x: " + player.x + " y: " + player.y);
 		}
-		
 		if (FlxG.keys.RIGHT) {
 			player.velocity.x = 100;
+			//FlxG.log("x: " + player.x + " y: " + player.y);
+		}
+		if (player.velocity.y == 0 && FlxG.keys.UP) {
+			player.velocity.y = -275;
+			//FlxG.log("x: " + player.x + " y: " + player.y);
 		}
 		
-		if (player.velocity.y == 0 && FlxG.keys.UP) {
-			player.velocity.y = -250;
+		//check which tile player is on
+		var center:FlxPoint = player.getMidpoint();
+		var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
+		FlxG.log(tileBelow);
+		
+		switch(tileBelow) {
+			case 0:
+				hideAllTiles();
+			case 9:
+				var tileArray:Array<Int> = tiles.getTileInstances(9);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 1, true);
+				}
+			case 10:
+				var tileArray:Array<Int> = tiles.getTileInstances(10);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 2, true);
+				}
+			case 11:
+				var tileArray:Array<Int> = tiles.getTileInstances(11);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 3, true);
+				}
+			case 12:
+				var tileArray:Array<Int> = tiles.getTileInstances(12);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 4, true);
+				}
+			case 13:
+				var tileArray:Array<Int> = tiles.getTileInstances(13);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 5, true);
+				}
+			case 14:
+				var tileArray:Array<Int> = tiles.getTileInstances(14);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 6, true);
+				}
+		}
+		
+	}
+	
+	/**
+	 * Hides all the map tiles
+	 */
+	private function hideAllTiles():Void {
+		if(tiles.getTileInstances(1) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(1);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 9, true);
+			}
+		}
+		if(tiles.getTileInstances(2) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(2);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 10, true);
+			}
+		}
+		if(tiles.getTileInstances(3) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(3);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 11, true);
+			}
+		}
+		if(tiles.getTileInstances(4) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(4);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 12, true);
+			}
+		}
+		if(tiles.getTileInstances(5) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(5);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 13, true);
+			}
+		}
+		if(tiles.getTileInstances(6) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(6);
+			for (i in tileArray) {
+				tiles.setTileByIndex(i, 14, true);
+			}
 		}
 	}
 }
