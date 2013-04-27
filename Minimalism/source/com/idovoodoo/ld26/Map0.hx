@@ -24,6 +24,15 @@ class Map0 extends FlxGroup
 	private var _levelSize:FlxPoint;
 	private var _tileSize:FlxPoint;
 	private var player:FlxSprite;
+	//TODO: move into platform class
+	private var platOne:Bool = false;
+	private var platTwo:Bool = false;
+	private var platThree:Bool = false;
+	private var platFour:Bool = false;
+	private var platFive:Bool = false;
+	private var platSix:Bool = false;
+	private var potato:FlxSprite;
+	private var potatoFound:Bool = false;
 	private static var SIZE:FlxPoint = new FlxPoint(10, 10);
 	
 	//map
@@ -101,6 +110,7 @@ class Map0 extends FlxGroup
 		FlxG.bgColor = 0xff8888ff;
 		createMap();
 		createPlayer();
+		createPickups();
 		createGUI();
 		addGroups();
 		createCamera();
@@ -147,6 +157,20 @@ class Map0 extends FlxGroup
 	}
 	
 	/**
+	 * Setup any pickups
+	 */
+	private function createPickups():Void
+	{
+		potato = new FlxSprite();
+		potato.loadGraphic("assets/potato.png", false, false, 30, 39, true);
+		potato.x = 400;
+		potato.y = 250;
+		potato.acceleration.y = 200;
+		potato.visible = false;
+		this.add(potato);
+	}
+	
+	/**
 	 * Build gui... if we are having one???
 	 */
 	private function createGUI():Void 
@@ -179,11 +203,12 @@ class Map0 extends FlxGroup
 	{
 		super.update();
 		FlxG.collide(mapGroup, player);
+		FlxG.collide(mapGroup, potato);
 		
 		//player movement > TODO: move to player class
 		if (FlxG.keys.LEFT) {
 			player.velocity.x = -100;
-			//FlxG.log("x: " + player.x + " y: " + player.y);
+			FlxG.log("x: " + player.x + " y: " + player.y);
 		}
 		if (FlxG.keys.RIGHT) {
 			player.velocity.x = 100;
@@ -197,8 +222,9 @@ class Map0 extends FlxGroup
 		//check which tile player is on
 		var center:FlxPoint = player.getMidpoint();
 		var tileBelow:Int = tiles.getTile(Std.int(center.x / _tileSize.x), Std.int((center.y + (player.height / 2)) / _tileSize.y));
-		FlxG.log(tileBelow);
+		//FlxG.log(tileBelow);
 		
+		//TODO: REFACTOR!!!!!!!!
 		switch(tileBelow) {
 			case 0:
 				hideAllTiles();
@@ -207,8 +233,21 @@ class Map0 extends FlxGroup
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 1, true);
 				}
+				platOne = true;
+			case 17:
+				var tileArray:Array<Int> = tiles.getTileInstances(17);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 1, true);
+				}
 			case 10:
 				var tileArray:Array<Int> = tiles.getTileInstances(10);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 2, true);
+				}
+				platTwo = true;
+				potato.visible = true;
+			case 18:
+				var tileArray:Array<Int> = tiles.getTileInstances(18);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 2, true);
 				}
@@ -217,8 +256,20 @@ class Map0 extends FlxGroup
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 3, true);
 				}
+				platThree = true;
+			case 19:
+				var tileArray:Array<Int> = tiles.getTileInstances(19);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 3, true);
+				}
 			case 12:
 				var tileArray:Array<Int> = tiles.getTileInstances(12);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 4, true);
+				}
+				platFour = true;
+			case 20:
+				var tileArray:Array<Int> = tiles.getTileInstances(20);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 4, true);
 				}
@@ -227,54 +278,76 @@ class Map0 extends FlxGroup
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 5, true);
 				}
+				platFive = true;
+			case 21:
+				var tileArray:Array<Int> = tiles.getTileInstances(21);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 5, true);
+				}
 			case 14:
 				var tileArray:Array<Int> = tiles.getTileInstances(14);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, 6, true);
 				}
+				platSix = true;
+			case 22:
+				var tileArray:Array<Int> = tiles.getTileInstances(22);
+				for (i in tileArray) {
+					tiles.setTileByIndex(i, 6, true);
+				}
 		}
 		
+		//check for potato collision
+		if (FlxG.collide(player, potato))
+		{
+			potato.exists = false;
+			potatoFound = true;
+		}
+	}
+	
+	private function changeCurrentTile(value:Int):Void
+	{
+		var tileArray:Array<Int> = tiles.getTileInstances(value);
+		for (i in tileArray) {
+			tiles.setTileByIndex(i, value - 8, true);
+		}
+	}
+	
+	/**
+	 * Change a map tile based on if you found the potato or not
+	 * @param	value
+	 */
+	private function changeTile(value:Int):Void 
+	{
+		if(tiles.getTileInstances(value) != null){
+			var tileArray:Array<Int> = tiles.getTileInstances(value);
+			for (i in tileArray) {
+				if(potatoFound)
+					tiles.setTileByIndex(i, 16 + value, true);
+				else
+					tiles.setTileByIndex(i, 8 + value, true);
+			}
+		}
 	}
 	
 	/**
 	 * Hides all the map tiles
 	 */
-	private function hideAllTiles():Void {
-		if(tiles.getTileInstances(1) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(1);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 9, true);
-			}
-		}
-		if(tiles.getTileInstances(2) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(2);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 10, true);
-			}
-		}
-		if(tiles.getTileInstances(3) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(3);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 11, true);
-			}
-		}
-		if(tiles.getTileInstances(4) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(4);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 12, true);
-			}
-		}
-		if(tiles.getTileInstances(5) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(5);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 13, true);
-			}
-		}
-		if(tiles.getTileInstances(6) != null){
-			var tileArray:Array<Int> = tiles.getTileInstances(6);
-			for (i in tileArray) {
-				tiles.setTileByIndex(i, 14, true);
-			}
-		}
+	private function hideAllTiles():Void 
+	{
+		if (platOne)
+			changeTile(1);
+		if (platTwo)
+			changeTile(2);
+		if (platThree)
+			changeTile(3);
+		if (platFour)
+			changeTile(4);
+		if (platFive)
+			changeTile(5);
+		if (platSix)
+			changeTile(6);
+			
+		potato.visible = false;
 	}
 }
