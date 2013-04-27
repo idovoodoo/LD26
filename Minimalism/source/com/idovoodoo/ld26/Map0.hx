@@ -10,6 +10,7 @@ import org.flixel.FlxSprite;
 import org.flixel.FlxState;
 import org.flixel.FlxG;
 import org.flixel.FlxCamera;
+import org.flixel.FlxText;
 import org.flixel.FlxTilemap;
 import org.flixel.FlxTimer;
 
@@ -46,8 +47,10 @@ class Map0 extends FlxGroup
 	private var explosion:FlxSound;
 	private var previousPlat:Int = 0;
 	private var hitSoundPlayed:Bool = false;
-	
+	private var potatoTime:Float = 10;
+	private var potatoCounter:Float = 0;
 	private static var SIZE:FlxPoint = new FlxPoint(10, 10);
+	private var timerText:FlxText;
 	
 	//map
 	private static var LEVEL:Array<Int> = [
@@ -180,13 +183,13 @@ class Map0 extends FlxGroup
 		music.loadEmbedded("assets/music.mp3", true);
 		music.fadeIn(1);
 		platformHit = new FlxSound();
-		platformHit.loadEmbedded("assets/platform-hit.mp3", false);
+		platformHit.loadEmbedded("assets/platform-hit2.mp3", false);
 		explosion = new FlxSound();
 		explosion.loadEmbedded("assets/explode.mp3", false);
 		
 		//potato pickup
 		potato = new FlxSprite();
-		potato.loadGraphic("assets/potato.png", false, false, 30, 39, true);
+		potato.loadGraphic("assets/potato-4.png", false, false, 15, 15, true);
 		potato.x = 400;
 		potato.y = 250;
 		potato.acceleration.y = 200;
@@ -207,20 +210,12 @@ class Map0 extends FlxGroup
 		pEmitter.setRotation(0, 0);
 		pEmitter.makeParticles("assets/particles.png", 1200, 0, true, 0);
 		add(pEmitter);
-		
-		//FlxTimer.manager.add(new FlxTimer().start(4, 0, onTimer));	
 	}
-	
-	//private function onTimer(timer:FlxTimer):Void
-	//{
-	//	explode(FlxG.width / 2, FlxG.height / 2);
-	//}
 	
 	private function explode(x:Float = 0, y:Float = 0):Void
 	{			
 		pEmitter.x = x;
 		pEmitter.y = y;
-		
 		pEmitter.start(true, 2, 0, 400);
 		pEmitter.update();
 	}
@@ -230,6 +225,11 @@ class Map0 extends FlxGroup
 	 */
 	private function createGUI():Void 
 	{
+		timerText = new FlxText(10, 10, FlxG.width, Std.string(Std.int(potatoCounter)));
+		timerText.setFormat(null, 32, 0x968888ff, "center");
+		timerText.scrollFactor = new FlxPoint(0, 0);
+		timerText.visible = false;
+		guiGroup.add(timerText);
 	}
 	
 	/**
@@ -281,7 +281,7 @@ class Map0 extends FlxGroup
 			//player movement > TODO: move to player class
 			if (FlxG.keys.LEFT) {
 				player.velocity.x = -100;
-				FlxG.log("x: " + player.x + " y: " + player.y);
+				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (FlxG.keys.RIGHT) {
 				player.velocity.x = 100;
@@ -291,10 +291,9 @@ class Map0 extends FlxGroup
 				player.velocity.y = -275;
 				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
-			
-			
+		
 			//FlxG.log(tileBelow);
-			
+			//set map tile types
 			switch(tileBelow) {
 				case 0:
 					hideAllTiles();
@@ -312,10 +311,16 @@ class Map0 extends FlxGroup
 				case 14:
 					platSix = true;
 			}
-			
-			
-			
+						
 			changeCurrentTile(tileBelow);
+			
+			//check if player has moved out of game area
+			if (player.x < 0 || player.x > FlxG.width) {
+				//silly player has fallen off, tsk
+				//TODO: play noise
+				createPlayer();
+			}
+			
 			
 			//check for potato collision
 			if (FlxG.collide(player, potato))
@@ -326,12 +331,27 @@ class Map0 extends FlxGroup
 				explosion.play();
 			}
 			
+			//set timer for potato counter
+			if (potatoFound) {
+				potatoCounter += FlxG.elapsed;
+				timerText.visible = true;
+				var timeLeft:Float = potatoTime - potatoCounter;
+				timerText.text = Std.string(Std.int(timeLeft));
+				if (potatoCounter >= potatoTime)
+				{
+					potatoFound = false;
+					timerText.visible = false;
+				}
+			}
+			
 			//check for exit collision
 			if (FlxG.collide(player, exitDoor))
 			{
 				exitReached = true;
 				explode(exitDoor.getMidpoint().x, exitDoor.getMidpoint().y);
 				exitDoor.exists = false;
+				player.exists = false;
+				mapGroup.exists = false;
 				explosion.play();
 				music.fadeOut(1);
 			}
@@ -344,7 +364,6 @@ class Map0 extends FlxGroup
 	 */
 	private function changeCurrentTile(value:Int):Void
 	{
-		
 		if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14) {
 			var tileArray:Array<Int> = tiles.getTileInstances(value);
 			for (i in tileArray) {
