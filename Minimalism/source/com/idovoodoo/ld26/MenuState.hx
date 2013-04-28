@@ -6,6 +6,7 @@ import nme.net.SharedObject;
 import org.flixel.FlxButton;
 import org.flixel.FlxG;
 import org.flixel.FlxPath;
+import org.flixel.FlxPoint;
 import org.flixel.FlxSave;
 import org.flixel.FlxSound;
 import org.flixel.FlxSprite;
@@ -18,6 +19,7 @@ class MenuState extends FlxState
 {
 	private var music:FlxSound;
 	private var startSound:FlxSound;
+	private var logo:FlxSprite;
 	
 	override public function create():Void 
 	{
@@ -28,16 +30,18 @@ class MenuState extends FlxState
 		#end		
 		FlxG.mouse.hide();
 			
-		var txt:FlxText = new FlxText(0, 200, FlxG.width, "The Forgetful Little Square");
-		txt.setFormat(null, 16, 0xffffffff, "center");
+		
+		
+		var txt:FlxText = new FlxText(0, 100, FlxG.width, "The Forgetful Little Square");
+		txt.setFormat(null, 28, 0xffff0000, "center");
 		this.add(txt);
 		
-		txt = new FlxText(0, 240, FlxG.width, "A Ludum Dare 26 Game by");
-		txt.setFormat(null, 16, 0xffffffff, "center");
-		this.add(txt);
-		
-		txt = new FlxText(0, 280, FlxG.width, "@idovoodoo");
+		txt = new FlxText(0, 140, FlxG.width, "By Idovoodoo");
 		txt.setFormat(null, 16, 0xff8888ff, "center");
+		this.add(txt);
+		
+		txt = new FlxText(0, 290, FlxG.width, "USE CURSOR KEYS TO PLAY");
+		txt.setFormat(null, 12, 0xffffffff, "center");
 		this.add(txt);
 		
 		#if (android || ios)
@@ -46,8 +50,24 @@ class MenuState extends FlxState
 			txt = new FlxText(0, 320, FlxG.width, "PRESS SPACE TO START");
 		#end
 		
-		txt.setFormat(null, 8, 0xffffffff, "center");
+		txt.setFormat(null, 12, 0xffffffff, "center");
 		this.add(txt);
+		
+		txt = new FlxText(0, 380, FlxG.width, "A Game Created in 48 Hours for Ludum Dare 26: Minimalism");
+		txt.setFormat(null, 10, 0xffffffff, "center");
+		this.add(txt);
+		
+		txt = new FlxText(0, 400, FlxG.width, "Music and audio created using WolframTones and FXR.");
+		txt.setFormat(null, 10, 0xffffffff, "center");
+		this.add(txt);
+		
+		txt = new FlxText(0, 420, FlxG.width, "Twitter: @idovoodoo");
+		txt.setFormat(null, 10, 0xff8888ff, "center");
+		this.add(txt);
+		
+		logo = new FlxSprite((FlxG.width / 2) - 128, 80, "assets/logo.png");
+		logo.scale = new FlxPoint(0.3, 0.3);
+		this.add(logo);
 		
 		//setup sound and music
 		music = new FlxSound();
