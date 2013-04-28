@@ -37,10 +37,10 @@ class GameState extends FlxState
 		super.create();
 		GameRegistry.init();
 		GameRegistry.level = 0;
-		LEVEL0 = new Map0(LEVEL_SIZE, TILE_SIZE);
-		//LEVEL1 = new Map1(new FlxPoint(1200, 480), TILE_SIZE);
-		this.add(LEVEL0);
-		//this.add(LEVEL1);
+		//LEVEL0 = new Map0(LEVEL_SIZE, TILE_SIZE);
+		LEVEL1 = new Map1(new FlxPoint(1200, 480), TILE_SIZE);
+		//this.add(LEVEL0);
+		this.add(LEVEL1);
 	}
 	
 	override public function destroy():Void 

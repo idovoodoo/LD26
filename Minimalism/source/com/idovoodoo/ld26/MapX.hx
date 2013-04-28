@@ -18,7 +18,7 @@ import org.flixel.FlxTimer;
  * ...
  * @author Idovoodoo
  */
-class Map1 extends FlxGroup
+class MapX extends FlxGroup
 {
 	private var tiles:FlxTilemap;
 	private var state:FlxState;
@@ -55,58 +55,58 @@ class Map1 extends FlxGroup
 	private var messageText:FlxText;
 	private var gameEndTime:Float = 3;
 	private var gameEndCounter:Float = 0;
-	private var endState:Bool = false;
+	public var endState:Bool = false;
 	
 	//map
 	private static var LEVEL:Array<Int> = [
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,12,12,12,12,12,12,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,13,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,13,13,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,11,11,11,11,0,0,0,0,0,0,0,0,12,12,12,12,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	];
 	
 	/**
@@ -135,7 +135,7 @@ class Map1 extends FlxGroup
 		createObjects();
 		createGUI();
 		addGroups();
-		
+		createCamera();
 	}
 	
 	/**
@@ -145,7 +145,7 @@ class Map1 extends FlxGroup
 	{
 		tiles = new FlxTilemap();			
 		tiles.loadMap(
-			FlxTilemap.arrayToCSV(LEVEL, 30), //convert array to tiles
+			FlxTilemap.arrayToCSV(LEVEL, 20), //convert array to tiles
 			"assets/tiles.png",
 			Std.int(_tileSize.x), //width of tiles
 			Std.int(_tileSize.y), //height of tiles
@@ -176,7 +176,6 @@ class Map1 extends FlxGroup
 		//add to scene
 		this.add(player);
 		FlxG.log("player created");
-		createCamera();
 	}
 	
 	/**
@@ -196,21 +195,19 @@ class Map1 extends FlxGroup
 		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato-4.png", false, false, 15, 15, true);
-		potato.x = 200;
-		potato.y = 350;
+		potato.x = 650;
+		potato.y = 180;
 		potato.acceleration.y = 200;
 		potato.visible = false;
-		//this.add(potato);
+		this.add(potato);
 		
 		//exit
 		exitDoor = new FlxSprite();
-		exitDoor.loadGraphic("assets/exit-new.png", false, false, 50, 50, true);
-		//exitDoor.addAnimation("default", [0, 1], 1, true);
-		exitDoor.angularVelocity = -90;
-		exitDoor.antialiasing = true;
-		exitDoor.x = 1100;
-		exitDoor.y = 380 + _tileSize.y - exitDoor.height; 
-		//exitDoor.play("default");
+		exitDoor.loadGraphic("assets/exit.png", true, false, 50, 50, true);
+		exitDoor.addAnimation("default", [0, 1], 1, true);
+		exitDoor.x = 700;
+		exitDoor.y = 70 + _tileSize.y - exitDoor.height; 
+		exitDoor.play("default");
 		this.add(exitDoor);
 		
 		//setup particle emitter for collisions
@@ -239,9 +236,8 @@ class Map1 extends FlxGroup
 		timerText.visible = false;
 		guiGroup.add(timerText);
 		
-		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "Sometimes you need faith. \nRun to the end and jump.");
+		messageText = new FlxText(10, FlxG.height - 55, FlxG.width, "Your memory is not very good. You are only a little square.");
 		messageText.setFormat(null, 16, 0x968888ff, "center");
-		messageText.scrollFactor = new FlxPoint(0, 0);
 		guiGroup.add(messageText);
 	}
 	
@@ -317,21 +313,22 @@ class Map1 extends FlxGroup
 				case 0:
 					hideAllTiles();
 				case 9:
-					messageText.text = "Sometimes you need faith. \nRun to the end and jump.";
+					messageText.text = "Your memory is not very good. You are only a little square.";
 					platOne = true;
-					potato.visible = true;
 				case 10:
-					messageText.text = "Yay! Brave Little Square! \nRun and jump again!";
+					messageText.text = "But I'm here to help you. Jump to the right.";
 					platTwo = true;
+					
 				case 11:
 					platThree = true;
-					messageText.text = "Keep going.";
+					messageText.text = "That square in the corner will take you to the next level.";
 				case 12:
 					platFour = true;
-					messageText.text = "One more.";
+					potato.visible = true;
+					messageText.text = "These little stars will help you remember.";
 				case 13:
 					platFive = true;
-					messageText.text = "Easy.";
+					messageText.text = "That square in the corner will take you to the next level.";
 				case 14:
 					platSix = true;
 					messageText.text = "That's it, you are nearly there!";
@@ -340,7 +337,7 @@ class Map1 extends FlxGroup
 			changeCurrentTile(tileBelow);
 			
 			//check if player has moved out of game area
-			if (player.x < 0 || player.x > _levelSize.x || player.y > _levelSize.y) {
+			if (player.x < 0 || player.x > FlxG.width) {
 				//silly player has fallen off, tsk
 				//TODO: play noise
 				createPlayer();
@@ -354,7 +351,7 @@ class Map1 extends FlxGroup
 				explode(potato.getMidpoint().x, potato.getMidpoint().y);				
 				potato.exists = false;
 				explosion.play();
-				messageText.text = "Just have faith and jump.";
+				messageText.text = "But they don't last very long!";
 			}
 			
 			//set timer for potato counter
@@ -384,8 +381,8 @@ class Map1 extends FlxGroup
 				explosion.play();
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
-				FlxG.fade(0xff000000, 1);
 				endState = true;
+				
 			}
 		}
 		
@@ -395,7 +392,7 @@ class Map1 extends FlxGroup
 			if (gameEndCounter >= gameEndTime)
 			{
 				music.stop();
-				FlxG.switchState(new MenuState());
+				GameRegistry.finished = true;
 			}
 		}
 	}

@@ -67,14 +67,6 @@ class Map0 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,13,13,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -82,15 +74,23 @@ class Map0 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,11,11,11,11,0,0,0,0,0,0,0,0,12,12,12,12,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,11,11,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -107,7 +107,7 @@ class Map0 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-	];
+];
 	
 	/**
 	 * Constructor
@@ -139,23 +139,13 @@ class Map0 extends FlxGroup
 	}
 	
 	/**
-	 * Build map components
+	 * Build map tiles
 	 */
 	private function createMap():Void 
 	{
 		tiles = new FlxTilemap();			
-		tiles.loadMap(
-			FlxTilemap.arrayToCSV(LEVEL, 20), //convert array to tiles
-			"assets/tiles.png",
-			Std.int(_tileSize.x), //width of tiles
-			Std.int(_tileSize.y), //height of tiles
-			0, //dont use autotiling
-			1, //start index
-			0, //start index for drawings
-			1 //which tile for collision
-		);	
-		//tiles.setTileByIndex(1, 6, true);
-		
+		tiles.loadMap(FlxTilemap.arrayToCSV(LEVEL, 20), // <<< dont forget to change this for new levels!!!
+			"assets/tiles.png", Std.int(_tileSize.x), Std.int(_tileSize.y), 0, 1, 0, 1);	
 		mapGroup.add(tiles);
 		FlxG.log("map created");
 	}
@@ -195,19 +185,21 @@ class Map0 extends FlxGroup
 		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato-4.png", false, false, 15, 15, true);
-		potato.x = 400;
-		potato.y = 250;
+		potato.x = 650;
+		potato.y = 180;
 		potato.acceleration.y = 200;
 		potato.visible = false;
-		this.add(potato);
+		//this.add(potato);
 		
 		//exit
 		exitDoor = new FlxSprite();
-		exitDoor.loadGraphic("assets/exit.png", true, false, 50, 50, true);
-		exitDoor.addAnimation("default", [0, 1], 1, true);
+		exitDoor.loadGraphic("assets/exit-new.png", false, false, 50, 50, true);
+		//exitDoor.addAnimation("default", [0, 1], 1, true);
+		exitDoor.angularVelocity = -90;
+		exitDoor.antialiasing = true;
 		exitDoor.x = 700;
-		exitDoor.y = 70 + _tileSize.y - exitDoor.height; 
-		exitDoor.play("default");
+		exitDoor.y = 230 + _tileSize.y - exitDoor.height; 
+		//exitDoor.play("default");
 		this.add(exitDoor);
 		
 		//setup particle emitter for collisions
@@ -230,14 +222,15 @@ class Map0 extends FlxGroup
 	 */
 	private function createGUI():Void 
 	{
-		timerText = new FlxText(10, 30, FlxG.width, Std.string(Std.int(potatoCounter)));
-		timerText.setFormat(null, 24, 0x968888ff, "left");
+		timerText = new FlxText(10, 20, FlxG.width, Std.string(Std.int(potatoCounter)));
+		timerText.setFormat(null, 24, 0x968888ff, "center");
 		timerText.scrollFactor = new FlxPoint(0, 0);
 		timerText.visible = false;
 		guiGroup.add(timerText);
 		
-		messageText = new FlxText(10, 10, FlxG.width, "Your memory is not very good. You are only a little square.");
-		messageText.setFormat(null, 14, 0x968888ff, "left");
+		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "Your memory is not very good, you are only a little square. \nBut that's okay, I'm here to help you. \nThere should be a platform somewhere above you.");
+		messageText.setFormat(null, 16, 0x968888ff, "center");
+		messageText.scrollFactor = new FlxPoint(0, 0);
 		guiGroup.add(messageText);
 	}
 	
@@ -290,11 +283,11 @@ class Map0 extends FlxGroup
 			//player movement > TODO: move to player class
 			if (FlxG.keys.LEFT) {
 				player.velocity.x = -100;
-				//FlxG.log("x: " + player.x + " y: " + player.y);
+				FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (FlxG.keys.RIGHT) {
 				player.velocity.x = 100;
-				//FlxG.log("x: " + player.x + " y: " + player.y);
+				FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (player.velocity.y == 0 && FlxG.keys.UP) {
 				player.velocity.y = -275;
@@ -313,18 +306,18 @@ class Map0 extends FlxGroup
 				case 0:
 					hideAllTiles();
 				case 9:
-					messageText.text = "Your memory is not very good. You are only a little square.";
+					messageText.text = "Your memory is not very good, you are only a little square. \nBut that's okay, I'm here to help you. \nThere should be a platform somewhere above you.";
 					platOne = true;
 				case 10:
-					messageText.text = "These little stars will help you remember.";
+					messageText.text = "You see that spinny thing to the right?\n That will take you to the next stage of your journey.";
 					platTwo = true;
-					potato.visible = true;
 				case 11:
 					platThree = true;
-					messageText.text = "That square in the corner will take you to the next level.";
+					messageText.text = "Nearly there.";
 				case 12:
 					platFour = true;
-					messageText.text = "That square in the corner will take you to the next level.";
+					potato.visible = true;
+					messageText.text = "These little stars will help you remember.";
 				case 13:
 					platFive = true;
 					messageText.text = "That square in the corner will take you to the next level.";
@@ -369,8 +362,8 @@ class Map0 extends FlxGroup
 			//check for exit collision
 			if (FlxG.collide(player, exitDoor))
 			{
-				exitReached = true;
 				explode(exitDoor.getMidpoint().x, exitDoor.getMidpoint().y);
+				exitReached = true;
 				messageText.text = "Well done Little Square!";
 				exitDoor.exists = false;
 				player.exists = false;
@@ -381,7 +374,6 @@ class Map0 extends FlxGroup
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
 				endState = true;
-				
 			}
 		}
 		
