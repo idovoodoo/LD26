@@ -15,7 +15,7 @@ import org.flixel.FlxText;
 import org.flixel.FlxU;
 import org.flixel.system.input.FlxTouch;
 
-class MenuState extends FlxState 
+class EndState extends FlxState 
 {
 	private var music:FlxSound;
 	private var startSound:FlxSound;
@@ -32,42 +32,28 @@ class MenuState extends FlxState
 			
 		
 		
-		var txt:FlxText = new FlxText(0, 100, FlxG.width, "The Forgetful Little Square");
+		
+		var txt:FlxText = new FlxText(0, 80, FlxG.width, "Thankyou for playing");
+		txt.setFormat(null, 28, 0xffffffff, "center");
+		this.add(txt);
+		
+		txt = new FlxText(0, 140, FlxG.width, "The Forgetful Little Square");
 		txt.setFormat(null, 28, 0xffff0000, "center");
 		this.add(txt);
-		
-		txt = new FlxText(0, 140, FlxG.width, "By Idovoodoo");
-		txt.setFormat(null, 16, 0xff8888ff, "center");
-		this.add(txt);
-		
-		txt = new FlxText(0, 290, FlxG.width, "USE CURSOR KEYS TO PLAY");
-		txt.setFormat(null, 12, 0xffffffff, "center");
-		this.add(txt);
+
 		
 		#if (android || ios)
 			txt = new FlxText(0, 320, FlxG.width, "TAP TO START");
 		#else
-			txt = new FlxText(0, 320, FlxG.width, "PRESS SPACE TO START");
+			txt = new FlxText(0, 320, FlxG.width, "PRESS ESC TO PLAY AGAIN");
 		#end
 		
 		txt.setFormat(null, 12, 0xffffffff, "center");
 		this.add(txt);
 		
-		txt = new FlxText(0, 380, FlxG.width, "A Game Created in 48 Hours for Ludum Dare 26: Minimalism");
-		txt.setFormat(null, 10, 0xffffffff, "center");
-		this.add(txt);
-		
-		txt = new FlxText(0, 400, FlxG.width, "Music and audio created using WolframTones and SFXR.");
-		txt.setFormat(null, 10, 0xffffffff, "center");
-		this.add(txt);
-		
-		txt = new FlxText(0, 420, FlxG.width, "Twitter: @idovoodoo");
-		txt.setFormat(null, 10, 0xff8888ff, "center");
-		this.add(txt);
-		
-		logo = new FlxSprite((FlxG.width / 2) - 128, 80, "assets/logo.png");
-		logo.scale = new FlxPoint(0.3, 0.3);
-		this.add(logo);
+		//logo = new FlxSprite((FlxG.width / 2) - 128, 80, "assets/logo.png");
+		//logo.scale = new FlxPoint(0.3, 0.3);
+		//this.add(logo);
 		
 		//setup sound and music
 		music = new FlxSound();
@@ -85,7 +71,7 @@ class MenuState extends FlxState
 	
 	private function kbmInput():Void 
 	{
-		if (FlxG.keys.SPACE) {
+		if (FlxG.keys.ESCAPE) {
 			startSound.play();
 			FlxG.flash(0xFFFFFFFF, 0.75);
 			FlxG.fade(0xff000000, 1, onFade);

@@ -18,7 +18,7 @@ import org.flixel.FlxTimer;
  * ...
  * @author Idovoodoo
  */
-class Map3 extends FlxGroup
+class Map4 extends FlxGroup
 {
 	private var tiles:FlxTilemap;
 	private var state:FlxState;
@@ -73,7 +73,7 @@ class Map3 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,12,12,12,12,12,12,12,12,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,13,13,13,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -81,9 +81,7 @@ class Map3 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,13,13,0,0,0,14,14,14,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,12,12,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -91,15 +89,17 @@ class Map3 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,16,16,16,16,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,0,0,0,9,9,9,9,9,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15,15,15,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -165,8 +165,8 @@ class Map3 extends FlxGroup
 		player = new FlxSprite();
 		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xff8888ff);
 		//spawn position and player properties
-		player.x = 260;
-		player.y = 360;
+		player.x = 1480;
+		player.y = 330;
 		player.acceleration.y = 350;
 		player.drag.x = 200;
 		//add to scene
@@ -198,8 +198,8 @@ class Map3 extends FlxGroup
 		//exitDoor.addAnimation("default", [0, 1], 1, true);
 		exitDoor.angularVelocity = -90;
 		exitDoor.antialiasing = true;
-		exitDoor.x = 1480;
-		exitDoor.y = 350 + _tileSize.y - exitDoor.height; 
+		exitDoor.x = 100;
+		exitDoor.y = 300 + _tileSize.y - exitDoor.height; 
 		//exitDoor.play("default");
 		this.add(exitDoor);
 		
@@ -215,8 +215,8 @@ class Map3 extends FlxGroup
 		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato-4.png", false, false, 15, 15, true);
-		potato.x = 350;
-		potato.y = 350;
+		potato.x = 1230;
+		potato.y = 180;
 		potato.acceleration.y = 200;
 		potato.visible = false;
 		potato.exists = true;
@@ -245,7 +245,7 @@ class Map3 extends FlxGroup
 		timerText.visible = false;
 		guiGroup.add(timerText);
 		
-		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "These little stars will reveal the map for you.");
+		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "The exit is way over the other side this time.");
 		messageText.setFormat(null, 16, 0x968888ff, "center");
 		messageText.scrollFactor = new FlxPoint(0, 0);
 		guiGroup.add(messageText);
@@ -322,7 +322,7 @@ class Map3 extends FlxGroup
 			switch(tileBelow) {
 				case 0:
 					if(!potatoFound){
-						for (i in 1...7)
+						for (i in 1...9)
 						{
 							changeCurrentTile(i);
 						}
@@ -330,22 +330,24 @@ class Map3 extends FlxGroup
 					potato.visible = false;
 				case 9:
 					if(potato.exists)
-						messageText.text = "These little stars will reveal the map for you.";
+						messageText.text = "The exit is way over the other side this time.";
 					else
-						messageText.text = "Can you remember which way to go?";
-					potato.visible = true;
+						messageText.text = "The exit is way over the other side this time";
 				case 10:
-					messageText.text = "...";
+					messageText.text = "Left again.";
 				case 11:
-					messageText.text = "...";
+					messageText.text = "Hmmm... not sure here. Your choice.";
 				case 12:
-					messageText.text = "...";
+					messageText.text = "Good choice.";
+					potato.visible = true;
 				case 13:
-					messageText.text = "You still have some faith left?";
+					messageText.text = "You can make it the rest of the way without me.";
 				case 14:
-					messageText.text = "Ooohhh, close.";
+					messageText.text = "...";
 				case 15:
-					messageText.text = "Nicely done :)";
+					messageText.text = "...";
+				case 16:
+					messageText.text = "You square genius!";
 			}
 			
 			if (!potatoFound) {//only do this if the potato isn't used
@@ -364,14 +366,15 @@ class Map3 extends FlxGroup
 			//check for potato collision
 			if (FlxG.collide(player, potato))
 			{
-				messageText.text = "They don't last very long though!!!!";
+				messageText.text = "Let's go!";
 				potatoFound = true;
 				timerText.visible = true;
 				explode(potato.getMidpoint().x, potato.getMidpoint().y);				
 				potato.exists = false;
 				explosion.play();
-				for (i in 9...15)
+				for (i in 9...17)
 				{
+					FlxG.log(i);
 					changeCurrentTile(i); //show all the tiles!
 				}
 			}
@@ -386,7 +389,7 @@ class Map3 extends FlxGroup
 				{
 					potatoFound = false;
 					timerText.visible = false;
-					for (i in 1...7)
+					for (i in 1...9)
 					{
 						changeCurrentTile(i); //potato expired so hide all the tiles!
 					}
@@ -408,7 +411,7 @@ class Map3 extends FlxGroup
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
 				endState = true;
-				FlxG.log("end of map3");
+				FlxG.log("end of map4");
 			}
 		}
 		
@@ -430,19 +433,19 @@ class Map3 extends FlxGroup
 	private function changeCurrentTile(value:Int):Void
 	{
 		if (tiles.getTileInstances(value) != null) {
-			if (value == 1 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7) {
+			if (value == 1 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7 || value == 8) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, value + 8, true); //visible to invisible
 				}
 			}
-			if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14 || value == 15) {
+			if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14 || value == 15 || value == 16) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, value - 8, true); //invisible to visible
 				}
 			}
-			else if (value == 17 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 23) {
+			else if (value == 17 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 23 || value == 23) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {	
 					tiles.setTileByIndex(i, value - 16, true); //shaded to visible

@@ -18,7 +18,7 @@ import org.flixel.FlxTimer;
  * ...
  * @author Idovoodoo
  */
-class Map3 extends FlxGroup
+class Map5 extends FlxGroup
 {
 	private var tiles:FlxTilemap;
 	private var state:FlxState;
@@ -57,6 +57,7 @@ class Map3 extends FlxGroup
 	private var gameEndCounter:Float = 0;
 	private var backgroundImage:FlxSprite;
 	private var endState:Bool = false;
+	private var secondSet:Bool = false;
 	
 	//map
 	private static var LEVEL:Array<Int> = [
@@ -70,36 +71,36 @@ class Map3 extends FlxGroup
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,12,12,12,12,12,12,12,12,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,10,10,10,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,13,13,0,0,0,14,14,14,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,12,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15,15,15,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,16,16,16,16,16,16,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -165,8 +166,8 @@ class Map3 extends FlxGroup
 		player = new FlxSprite();
 		player.makeGraphic(Std.int(SIZE.x), Std.int(SIZE.y), 0xff8888ff);
 		//spawn position and player properties
-		player.x = 260;
-		player.y = 360;
+		player.x = 50;
+		player.y = 80;
 		player.acceleration.y = 350;
 		player.drag.x = 200;
 		//add to scene
@@ -198,8 +199,8 @@ class Map3 extends FlxGroup
 		//exitDoor.addAnimation("default", [0, 1], 1, true);
 		exitDoor.angularVelocity = -90;
 		exitDoor.antialiasing = true;
-		exitDoor.x = 1480;
-		exitDoor.y = 350 + _tileSize.y - exitDoor.height; 
+		exitDoor.x = 1500;
+		exitDoor.y = 140 + _tileSize.y - exitDoor.height; 
 		//exitDoor.play("default");
 		this.add(exitDoor);
 		
@@ -215,15 +216,15 @@ class Map3 extends FlxGroup
 		//potato pickup
 		potato = new FlxSprite();
 		potato.loadGraphic("assets/potato-4.png", false, false, 15, 15, true);
-		potato.x = 350;
-		potato.y = 350;
+		potato.x = 750;
+		potato.y = 320;
 		potato.acceleration.y = 200;
 		potato.visible = false;
-		potato.exists = true;
+		potato.exists = false;
 		potatoFound = false;
 		potatoCounter = 0;
 		timerText.visible = false;
-		this.add(potato);
+		//this.add(potato);
 	}
 	
 	private function explode(x:Float = 0, y:Float = 0):Void
@@ -245,7 +246,7 @@ class Map3 extends FlxGroup
 		timerText.visible = false;
 		guiGroup.add(timerText);
 		
-		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "These little stars will reveal the map for you.");
+		messageText = new FlxText(10, FlxG.height - 70, FlxG.width - 10, "Okay. This is the last level so it will be the hardest.\nYou will really need my help.\nFall straight down to the right.");
 		messageText.setFormat(null, 16, 0x968888ff, "center");
 		messageText.scrollFactor = new FlxPoint(0, 0);
 		guiGroup.add(messageText);
@@ -322,31 +323,43 @@ class Map3 extends FlxGroup
 			switch(tileBelow) {
 				case 0:
 					if(!potatoFound){
-						for (i in 1...7)
+						for (i in 1...9)
 						{
 							changeCurrentTile(i);
 						}
 					}
 					potato.visible = false;
 				case 9:
-					if(potato.exists)
-						messageText.text = "These little stars will reveal the map for you.";
+					if(secondSet)
+						messageText.text = "Nicely done, I thought that one might catch you out.\nYou couldn't have got this far without me though!\n*COUGH*";
 					else
-						messageText.text = "Can you remember which way to go?";
-					potato.visible = true;
+						messageText.text = "Okay. This is the last level so it will be the hardest.\nYou will really need my help.\nFall straight down to the right.";
 				case 10:
-					messageText.text = "...";
+					if (secondSet)
+						messageText.text = "Wow, you really are a clever Little Square!";
+					else
+						messageText.text = "Right, this time.... *PHONE RINGS*\nErrm. just carry on without me for a moment.";
 				case 11:
-					messageText.text = "...";
+					messageText.text = "*MUFFLED TALKING*\n\"I know, I know, I can't believe it.\nWhat made her so upset?\"\n";
 				case 12:
-					messageText.text = "...";
+					messageText.text = "*MUFFLED TALKING*\n\"Are you serious? It was all because of a potato?!\"";
+					
 				case 13:
-					messageText.text = "You still have some faith left?";
+					messageText.text = "\"Oh, excuse me a moment.\"\n Errm... I dunno, left maybe?";
 				case 14:
-					messageText.text = "Ooohhh, close.";
+					//potato.visible = true;
+					messageText.text = "*MUFFLED TALKING*\n\"Yeh, it's another silly little square that can't remember\n where the platforms are.\"";
 				case 15:
-					messageText.text = "Nicely done :)";
+					messageText.text = "Oops, sorry Little Square. I will be back with you in a moment.\nJust carry on without me for now.";
+				case 16:
+					messageText.text = "*MUFFLED TALKING*\n\"I gotta go, this little square is getting close now.\"";
 			}
+			
+			//hack for the second set of platforms
+			if (player.x > 1050)
+				secondSet = true;
+			else
+				secondSet = false;
 			
 			if (!potatoFound) {//only do this if the potato isn't used
 				if(tileBelow > 9 - 1) //only change if the platform is invisible
@@ -364,14 +377,15 @@ class Map3 extends FlxGroup
 			//check for potato collision
 			if (FlxG.collide(player, potato))
 			{
-				messageText.text = "They don't last very long though!!!!";
+				//messageText.text = "Let's go!";
 				potatoFound = true;
 				timerText.visible = true;
 				explode(potato.getMidpoint().x, potato.getMidpoint().y);				
 				potato.exists = false;
 				explosion.play();
-				for (i in 9...15)
+				for (i in 9...17)
 				{
+					FlxG.log(i);
 					changeCurrentTile(i); //show all the tiles!
 				}
 			}
@@ -386,7 +400,7 @@ class Map3 extends FlxGroup
 				{
 					potatoFound = false;
 					timerText.visible = false;
-					for (i in 1...7)
+					for (i in 1...9)
 					{
 						changeCurrentTile(i); //potato expired so hide all the tiles!
 					}
@@ -408,7 +422,7 @@ class Map3 extends FlxGroup
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
 				endState = true;
-				FlxG.log("end of map3");
+				FlxG.log("end of map5");
 			}
 		}
 		
@@ -418,7 +432,8 @@ class Map3 extends FlxGroup
 			if (gameEndCounter >= gameEndTime)
 			{
 				music.stop();
-				GameRegistry.finished = true;
+				GameRegistry.level = 0;
+				FlxG.switchState(new EndState());
 			}
 		}
 	}
@@ -430,19 +445,19 @@ class Map3 extends FlxGroup
 	private function changeCurrentTile(value:Int):Void
 	{
 		if (tiles.getTileInstances(value) != null) {
-			if (value == 1 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7) {
+			if (value == 1 || value == 2 || value == 3 || value == 4 || value == 5 || value == 6 || value == 7 || value == 8) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, value + 8, true); //visible to invisible
 				}
 			}
-			if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14 || value == 15) {
+			if (value == 9 || value == 10 || value == 11 || value == 12 || value == 13 || value == 14 || value == 15 || value == 16) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {
 					tiles.setTileByIndex(i, value - 8, true); //invisible to visible
 				}
 			}
-			else if (value == 17 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 23) {
+			else if (value == 17 || value == 18 || value == 19 || value == 20 || value == 21 || value == 22 || value == 23 || value == 23) {
 				var tileArray:Array<Int> = tiles.getTileInstances(value);
 				for (i in tileArray) {	
 					tiles.setTileByIndex(i, value - 16, true); //shaded to visible
