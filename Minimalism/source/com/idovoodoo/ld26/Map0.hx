@@ -55,6 +55,7 @@ class Map0 extends FlxGroup
 	private var messageText:FlxText;
 	private var gameEndTime:Float = 3;
 	private var gameEndCounter:Float = 0;
+	private var backgroundImage:FlxSprite;
 	public var endState:Bool = false;
 	
 	//map
@@ -129,12 +130,12 @@ class Map0 extends FlxGroup
 	 */
 	private function createLevel():Void 
 	{
-		FlxG.bgColor = 0xffffffff;
+		//FlxG.bgColor = 0xffffffff;
 		createMap();
-		createPlayer();
-		createObjects();
 		createGUI();
 		addGroups();
+		createPlayer();
+		createObjects();
 		createCamera();
 	}
 	
@@ -143,6 +144,9 @@ class Map0 extends FlxGroup
 	 */
 	private function createMap():Void 
 	{
+		backgroundImage = new FlxSprite(0, 0, "assets/map0-background.png");
+		//backgroundImage.scrollFactor.x = 0.05;
+		mapGroup.add(backgroundImage);
 		tiles = new FlxTilemap();			
 		tiles.loadMap(FlxTilemap.arrayToCSV(LEVEL, 20), // <<< dont forget to change this for new levels!!!
 			"assets/tiles.png", Std.int(_tileSize.x), Std.int(_tileSize.y), 0, 1, 0, 1);	
@@ -374,6 +378,7 @@ class Map0 extends FlxGroup
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
 				endState = true;
+				FlxG.log("end of map0");
 			}
 		}
 		
