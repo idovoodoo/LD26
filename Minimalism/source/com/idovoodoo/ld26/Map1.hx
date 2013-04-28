@@ -300,11 +300,11 @@ class Map1 extends FlxGroup
 			//player movement > TODO: move to player class
 			if (FlxG.keys.LEFT) {
 				player.velocity.x = -100;
-				FlxG.log("x: " + player.x + " y: " + player.y);
+				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (FlxG.keys.RIGHT) {
 				player.velocity.x = 100;
-				FlxG.log("x: " + player.x + " y: " + player.y);
+				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (player.velocity.y == 0 && FlxG.keys.UP) {
 				player.velocity.y = -275;

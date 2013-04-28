@@ -150,18 +150,8 @@ class Map2 extends FlxGroup
 		mapGroup.add(backgroundImage);
 		
 		tiles = new FlxTilemap();			
-		tiles.loadMap(
-			FlxTilemap.arrayToCSV(LEVEL, 40), //convert array to tiles
-			"assets/tiles.png",
-			Std.int(_tileSize.x), //width of tiles
-			Std.int(_tileSize.y), //height of tiles
-			0, //dont use autotiling
-			1, //start index
-			0, //start index for drawings
-			1 //which tile for collision
-		);	
-		//tiles.setTileByIndex(1, 6, true);
-		
+		tiles.loadMap(FlxTilemap.arrayToCSV(LEVEL, 40), // << don't forget to change this!
+			"assets/tiles.png", Std.int(_tileSize.x), Std.int(_tileSize.y), 0, 1, 0, 1);
 		mapGroup.add(tiles);
 		FlxG.log("map created");
 	}
@@ -300,11 +290,11 @@ class Map2 extends FlxGroup
 			//player movement > TODO: move to player class
 			if (FlxG.keys.LEFT) {
 				player.velocity.x = -100;
-				FlxG.log("x: " + player.x + " y: " + player.y);
+				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (FlxG.keys.RIGHT) {
 				player.velocity.x = 100;
-				FlxG.log("x: " + player.x + " y: " + player.y);
+				//FlxG.log("x: " + player.x + " y: " + player.y);
 			}
 			if (player.velocity.y == 0 && FlxG.keys.UP) {
 				player.velocity.y = -275;
@@ -393,8 +383,8 @@ class Map2 extends FlxGroup
 				explosion.play();
 				music.fadeOut(1);
 				FlxG.flash(0xFFFFFFFF, 0.75);
-				FlxG.fade(0xff000000, 1);
 				endState = true;
+				FlxG.log("end of map2");
 			}
 		}
 		
@@ -404,7 +394,7 @@ class Map2 extends FlxGroup
 			if (gameEndCounter >= gameEndTime)
 			{
 				music.stop();
-				FlxG.switchState(new MenuState());
+				GameRegistry.finished = true;
 			}
 		}
 	}

@@ -25,6 +25,7 @@ class GameState extends FlxState
 	public static var LEVEL0:Map0 = null;
 	public static var LEVEL1:Map1 = null;
 	public static var LEVEL2:Map2 = null;
+	public static var LEVEL3:Map3 = null;
 
 	override public function create():Void 
 	{
@@ -39,8 +40,8 @@ class GameState extends FlxState
 		GameRegistry.init();
 		GameRegistry.level = 0;
 		LEVEL0 = new Map0(LEVEL_SIZE, TILE_SIZE);
-		//LEVEL2 = new Map2(new FlxPoint(1600, 480), TILE_SIZE);
 		this.add(LEVEL0);
+		//LEVEL2 = new Map2(new FlxPoint(1600, 480), TILE_SIZE);
 		//this.add(LEVEL2);
 	}
 	
@@ -68,6 +69,14 @@ class GameState extends FlxState
 				LEVEL1.exists = false;
 				LEVEL2 = new Map2(new FlxPoint(1600, 480), TILE_SIZE);
 				this.add(LEVEL2);
+			}
+			else if (GameRegistry.level == 2) { // level 2 (map2) has finished!		
+				FlxG.log("on to map3");
+				GameRegistry.level = 3;
+				GameRegistry.finished = false;
+				LEVEL2.exists = false;
+				LEVEL3 = new Map3(new FlxPoint(1600, 480), TILE_SIZE);
+				this.add(LEVEL3);
 			}
 		}
 		
